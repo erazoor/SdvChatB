@@ -10,21 +10,6 @@ const gcloudManager = new GCloudManager();
 const NODE_ENV = process.env.NODE_ENV;
 require("dotenv").config({ path: `./.env.${NODE_ENV}` });
 
-const topicName = process.env.TOPIC_NAME;
-const subscriptionName = process.env.SUBSCRIPTION_NAME;
-
-gcloudManager.listenForMessages(
-  topicName,
-  subscriptionName,
-  (message) => {
-    console.log(`Received message: ${message.data.toString()}`);
-    message.ack();
-  },
-  (error) => {
-    console.error(`Received error: ${error.message}`);
-  }
-);
-
 app.use(bodyParser.json());
 app.use("/api", router);
 

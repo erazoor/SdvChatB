@@ -3,12 +3,19 @@ const gcloudController = require("./controller/gcloudController");
 
 const router = express.Router();
 
-router.post("/topics", gcloudController.createTopic);
-router.delete("/topics", gcloudController.deleteTopic);
+/* Chatroom routes */
+router.post("/chatroom", gcloudController.createChatroom);
 
-router.post("/subscriptions", gcloudController.createSubscription);
-router.delete("/subscriptions", gcloudController.deleteSubscription);
+router.post("/chatroom/:chatroomId/message", gcloudController.postMessage);
 
-router.post("/publish", gcloudController.publishMessage);
+router.post(
+  "/chatroom/:chatroomId/subscribe",
+  gcloudController.subscribeToChatroom
+);
+
+router.get(
+  "/chatroom/:chatroomId/messages",
+  gcloudController.getChatroomMessages
+);
 
 module.exports = router;
